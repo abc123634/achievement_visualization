@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Achievement Visualization</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+  <!-- <link rel="stylesheet" href="site.css" type="text/css"> -->
+</head>
+<body>
+  <canvas id="viewport" width="1400" height="1200"></canvas>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+  <!-- run from the minified library file: -->
+  <script src="../lib/arbor.js"></script>  
+  <script src="../lib/arbor-tween.js"></script>
+  <script src="../lib/arbor-graphics.js"></script>
+  <script src="../lib/renderer.js"></script>
+  <!-- <script src="main.js"></script> -->
+  <script language="javascript" type="text/javascript">
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+          color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    var sys = arbor.ParticleSystem();
+    sys.parameters({stiffness:900, repulsion:2000, gravity:true, dt:0.015})
+
+    sys.renderer = Renderer('#viewport');
+
+    var CLR = {
+      c1:getRandomColor(),
+      c2:getRandomColor(), 
+      c3:getRandomColor()
+    }
+    var data = {
+      nodes:{
+        data_sci:{'color':getRandomColor(),'shape':'dot','label':'Data Science'},
+
+
+        visual:{'color':getRandomColor(),'shape':'dot','label':'Visualization'},
+          arbor:{'color':CLR.c1,'label':'Arbor.js'},
+          ipython:{'color':CLR.c1,'label':'IPython'},
+
+        ml:{'color':getRandomColor(),'shape':'dot','label':'Machine Learning'},
+          scikit_learn:{'color':CLR.c1,'label':'Scikit Learn'},
+
+        cloud_compute:{'color':getRandomColor(),'shape':'dot','label':'Cloud Computing'},
+
+
+        big_data:{'color':getRandomColor(),'shape':'dot','label':'Big Data'},
+
+
+        program:{'color':getRandomColor(),'shape':'dot','label':'Programming'},
+          python:{'color':CLR.c1,'label':'Python'},
+            python_1:{'color':CLR.c2,'label':'Pythonic Coding Style'},
+            python_2:{'color':CLR.c2,'label':'Python libaries'},
+              urllib:{'color':CLR.c3,'label':'urllib'},
+              re:{'color':CLR.c3,'label':'re'},
+              json:{'color':CLR.c3,'label':'json'},
+
+        statistic:{'color':getRandomColor(),'shape':'dot','label':'Statistic'},
+
+
+        data_analysis:{'color':getRandomColor(),'shape':'dot','label':'Data Analysis'},
+
+
+        text_mining:{'color':getRandomColor(),'shape':'dot','label':'Text mining/NLP'},
+
+
+        recommender:{'color':getRandomColor(),'shape':'dot','label':'Recommender System', 'child':'yoo'},
+
+
+        database:{'color':getRandomColor(),'shape':'dot','label':'Database'},
+          dynamo:{'color':CLR.c1,'label':'DynamoDB'},
+          mongo:{'color':CLR.c1,'label':'MongoDB'},
+            mongo_mapreduce:{'color':CLR.c2,'label':'Map reduce'},
+          redis:{'color':CLR.c1,'label':'Redis'},
+        
+        
+        aws:{'color':getRandomColor(),'shape':'dot','label':'Amazon Web Service'},
+          aws_lambda:{'color':CLR.c1,'label':'AWS Lambda'},
+            aws_lambda_1:{'color':CLR.c2,'label':'Scikit learn stack'},
+            aws_lambda_2:{'color':CLR.c2,'label':'Import dependencies locally'},
+          aws_rds:{'color':CLR.c1,'label':'AWS RDS'},
+          aws_ec2:{'color':CLR.c1,'label':'AWS EC2'},
+            aws_ec2_1:{'color':CLR.c2,'label':'SSH Connect Step'},
+          aws_sqs:{'color':CLR.c1,'label':'AWS SQS'},
+          // aws_redis:{'color':CLR.c1,'label':'AWS Redis/ElastiCache'},
+          aws_ml:{'color':CLR.c1,'label':'AWS Machine Learning'},
+
+
+        data_mungling:{'color':getRandomColor(),'shape':'dot','label':'Data Mungling'},
+          pandas:{'color':CLR.c1,'label':'Pandas'},
+  
+        
+        cooperate:{'color':getRandomColor(),'shape':'dot','label':'Cooperation'},
+          git:{'color':CLR.c1,'label':'Git', alpha:0},
+            git_1:{'color':CLR.c2,'label':'Naive branching', alpha:0},
+          markdown:{'color':CLR.c1,'label':'Markdown'},
+        
+        online_learning:{'color':getRandomColor(),'shape':'dot','label':'Online Learning'},
+          coursera:{'color':CLR.c1,'label':'Coursera'},
+          cloud_academy:{'color':CLR.c1,'label':'Cloud Academy'},
+        
+      },
+      edges:{
+        // data_sci:{ 
+        //   visual:{}, ml:{}, cloud_compute:{}, big_data:{}, program:{}, statistic:{}, data_analysis:{},text_mining:{}, recommender:{}, database:{}, data_mungling:{} },
+        visual:{
+          arbor:{}, ipython:{}
+        },
+        database:{
+          dynamo:{}, 
+          mongo:{}, 
+          redis:{},
+        },
+        // cloud_compute:{
+        //   aws:{}
+        // },
+        aws:{
+          aws_lambda:{}, 
+          aws_rds:{}, 
+          aws_ec2:{},
+          aws_sqs:{},
+          // aws_redis:{},
+          aws_ml:{}
+        },
+        aws_lambda:{
+          aws_lambda_1:{},
+          aws_lambda_2:{},
+          dynamo:{}
+        },
+        ml:{
+          scikit_learn:{},
+          aws_ml:{}
+        },
+        data_mungling:{
+          pandas:{}
+        },
+        data_analysis:{
+          pandas:{}
+        },
+        text_mining:{
+          scikit_learn:{}
+        },
+        mongo:{
+          mongo_mapreduce:{}
+        },
+        cooperate:{
+          git:{},
+          markdown:{}
+        },
+        git:{
+          git_1:{}
+        },
+        aws_ec2:{
+          aws_ec2_1:{}
+        },
+        program:{
+          python:{}
+        },
+        python:{
+          python_1:{},
+          python_2:{},
+        },
+        python_2:{
+          urllib:{},
+          re:{},
+          json:{}
+        },
+        online_learning:{
+          coursera:{},
+          cloud_academy:{}
+        }
+      }
+    };
+    
+    // aws = sys.addNode('a', {'color':'black'});
+    // sys.tweenNode(aws, 1.5, {color:"cyan"})
+    sys.graft(data)
+    // a = sys.addNode("a", {label:'yooooo', fixed:'true', mass:1});
+    
+
+    // setTimeout(function(){
+    //   var postLoadData = {
+    //   nodes:{
+    //   joe:{'color':'orange','shape':'dot','label':'joe'},
+    //   fido:{'color':'green','shape':'dot','label':'fido'},
+    //   fluffy:{'color':'blue','shape':'dot','label':'fluffy'}
+    //   },
+    //   edges:{
+    //   dog:{ fido:{} },
+    //   cat:{ fluffy:{} },
+    //   joe:{ fluffy:{},fido:{} }
+    //   }
+    //   };
+    //   sys.graft(postLoadData);
+    // },10000);
+
+  </script>
+
+</body>
+</html>

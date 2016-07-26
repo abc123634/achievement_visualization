@@ -1,0 +1,27 @@
+body{
+  margin:0;
+  padding:20px;
+  font:12px/17px Arial, sans-serif;
+  background:#f9f9f9;
+}
+
+
+.more{
+  color:#AD621C;
+  text-decoration:none;
+  font-style:italic;
+}
+.more:hover{
+  text-decoration:underline;
+}
+.more ~ *{
+  display:none;
+}
+
+.more.less{
+/*  border:1px solid red;*/
+font-size:9px;
+  line-height:4px;
+  margin:0;
+  padding:0;
+}
